@@ -6,11 +6,24 @@ import ShopIcon from './img/shopping-cart-solid.svg'
 import { Link } from 'react-router-dom'
 import './CSS/Header.css'
 
+
+
+
 export class Header extends Component {
+
+    state = {
+        toggle: false
+    }
+
+    menuToggle = () => {
+        this.setState({toggle: !this.state.toggle})
+    }
+
     render() {
+        const {toggle} =  this.state
         return (
             <header>
-                <div className='menu'>
+                <div className='menu' onClick={this.menuToggle}>
                     <img src={Menu} alt='' width='20'/>
                 </div>
                 <div className='logo'>
@@ -23,14 +36,14 @@ export class Header extends Component {
                 </div>
 
                 <nav>
-                    <ul>
+                    <ul className={toggle ? 'toggle' : ''}>
                         <li> <Link to='/'>Home</Link></li>
                         <li> <Link to='/market'>Market</Link></li>
                         <li> <Link to='/contact'>Contact</Link></li>
                         <li> <Link to='/about'>About</Link></li>
                         <li> <Link to='/support'>Support</Link></li>
                         <li> <Link to='/login'>Login/Register</Link></li>
-                        <li className='close'> 
+                        <li className='close' onClick={this.menuToggle}> 
                             <img src={Close} alt='' width='20'/>
                         </li>
                     </ul>
