@@ -20,3 +20,9 @@ code {
   margin: 0 auto;
   
 }
+
+section {
+  box-shadow: 0 0 5px #ccc;
+  padding: 15px 10px;
+  
+}
