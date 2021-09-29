@@ -11,15 +11,15 @@ export class Products extends Component {
         return (
             <div id = 'products'>
                 {
-                    products.map(product => {
-                        return (
-                            <div className='card' key={product._id}>
-                                <Link to = {`/product/${product._id}`}>
+                   products.map(product => (
+                    
+                        <div className='card' key={product.id}>
+                                <Link to = {`/product/${product.id}`}>
                                     <img src={product.src} alt='ak'/>
                                 </Link>
                                 <div  className='content'>
                                     <h3> 
-                                        <Link to={`/product/${product._id}`}>
+                                        <Link to={`/product/${product.id}`}>
                                             {product.title}
                                         </Link>
                                     </h3>
@@ -28,8 +28,7 @@ export class Products extends Component {
                                     <button>Add to Card</button>
                                 </div>
                             </div>
-                        )
-                    })
+                   ))
                 }
             </div>
         )
