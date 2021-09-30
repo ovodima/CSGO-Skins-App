@@ -5,11 +5,15 @@ import CartIcon from './img/steam-brands.svg'
 import ShopIcon from './img/shopping-cart-solid.svg'
 import { Link } from 'react-router-dom'
 import './CSS/Header.css'
+import { DataContext } from './Context'
+
 
 
 
 
 export class Header extends Component {
+
+    static contextType = DataContext
 
     state = {
         toggle: false
@@ -21,6 +25,7 @@ export class Header extends Component {
 
     render() {
         const {toggle} =  this.state
+        const {cart} = this.context
         return (
             <header>
                 <div className='menu' onClick={this.menuToggle}>
@@ -49,7 +54,7 @@ export class Header extends Component {
                     </ul>
 
                     <div className='nav-cart'>
-                        <span>0</span>
+                        <span>{cart.length}</span>
                         <Link to='/cart'>
                         <img src={ShopIcon} alt='' width='20'/>
                         </Link>  

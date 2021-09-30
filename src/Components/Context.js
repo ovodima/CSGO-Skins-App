@@ -102,13 +102,65 @@ export class DataProvider extends Component {
                 ],
                 "count": 1
             },
-        ]
+        ],
+        cart: []
     }
 
+    addCart = (id) => {
+        const {products, cart} = this.state
+        const check = cart.every(item => {
+            return item.id !== id
+        }) 
+
+
+        if(check){
+                const data = products.filter(products => {
+                    return products.id === id
+                }) 
+                this.setState({cart: [...cart, ...data]})
+            } else {
+                alert('The product has been added to cart! Thank you')
+            }
+        }
+
+        reduction = id => {
+            const {cart} = this.state
+            cart.forEach(item => {
+                if(item.id === id) {
+                    item.count === 1 ? item.count = 1 : item.count -=1
+                }
+            })
+            this.setState({cart: cart})
+        }
+        
+       increase = id => {
+           const {cart}= this.state
+           cart.forEach(item => {
+               if(item.id === id) {
+                   item.count += 1
+               } 
+           })
+           this.setState({cart: cart})
+       }
+
+       removeProduct = id => {
+           if(window.confirm('Do you want delete product?')) {
+               const {cart} = this.state
+               cart.forEach((item, index) => {
+                   if(item.id === id) {
+                    cart.splice(index,1)
+                   }
+               })
+               this.setState({cart: cart})
+           }
+       }
+        
+
     render() {
-        const {products} = this.state
+        const {products, cart} = this.state
+        const {addCart, reduction, increase, removeProduct} = this
         return (
-            <DataContext.Provider value={{products}}>
+            <DataContext.Provider value={{products, addCart, cart, reduction, increase , removeProduct}}>
                 {this.props.children}
             </DataContext.Provider>
         )
